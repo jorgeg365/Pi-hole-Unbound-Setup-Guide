@@ -20,31 +20,40 @@
 2. FIND RASPBERRY PI IP
 Option 1: Check router DHCP leases
 Option 2: Run on Pi:
+```bash
 ip a
-
-3. SSH INTO RASPBERRY PI
+```
+4. SSH INTO RASPBERRY PI
 ssh pi@[IP_ADDRESS]
 Default password: (what you set in Imager)
 
-4. UPDATE SYSTEM
+5. UPDATE SYSTEM
+```bash
 sudo apt update && sudo apt upgrade -y
-
-5. SET STATIC IP (RECOMMENDED)
+```
+6. SET STATIC IP (RECOMMENDED)
 Option 1: DHCP Reservation (Best)
 - Reserve IP in router settings
 
 Option 2: Manual Static IP
+```bash
 sudo nano /etc/dhcpcd.conf
+```
 Add:
+```bash
 interface eth0
 static ip_address=192.168.1.100/24
 static routers=192.168.1.1
 static domain_name_servers=192.168.1.1
+```
 Then:
+```bash
 sudo reboot
-
+```
 6. INSTALL PI-HOLE
+```bash
 curl -sSL https://install.pi-hole.net | bash
+```
 Follow prompts:
 - Confirm static IP
 - Select upstream DNS (temporary)
@@ -52,8 +61,9 @@ Follow prompts:
 - Enable query logging
 
 Set admin password:
+```bash
 pihole -a -p
-
+```
 7. ACCESS WEB INTERFACE
 http://[PI_IP]/admin
 
@@ -73,11 +83,15 @@ Option B: Router DHCP (Recommended)
 ## INSTALL UNBOUND (RECURSIVE DNS)
 
 1. INSTALL UNBOUND
+```bash
 sudo apt install unbound -y
-
+```
 2. CONFIGURE UNBOUND
+```bash
 sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
+```
 Paste:
+```bash
 server:
   verbosity: 0
   interface: 127.0.0.1
@@ -98,10 +112,11 @@ server:
   private-address: 169.254.0.0/16
   private-address: 172.16.0.0/12
   private-address: 10.0.0.0/8
-
+```
 3. RESTART UNBOUND
+```bash
 sudo service unbound restart
-
+```
 4. TEST UNBOUND
 dig example.com @127.0.0.1 -p 5335
 

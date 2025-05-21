@@ -1,48 +1,122 @@
-Guide to Install and Set Up Pi-hole with Unbound on Raspberry Pi
+# Pi-hole + Unbound Setup on Raspberry Pi
 
-This guide will walk you through installing Pi-hole (a network-wide ad blocker) and Unbound (a recursive DNS resolver) on a Raspberry Pi for improved privacy and ad-free browsing.
+## PREREQUISITES
+- Raspberry Pi (3B+/4/5 recommended)
+- 8GB+ microSD card
+- Ethernet connection (recommended)
+- Raspberry Pi Imager (https://www.raspberrypi.com/software/)
 
-Requirements
-Raspberry Pi (Recommended: Pi 3B+/4/5, but Pi 2/3 also works)
+## INSTALLATION STEPS
 
-MicroSD Card (8GB minimum, 16GB recommended)
+1. FLASH RASPBERRY PI OS LITE
+- Use Raspberry Pi Imager to install:
+  - OS: Raspberry Pi OS Lite (64-bit)
+- Configure settings:
+  - Hostname: pihole.local
+  - Enable SSH
+  - Set username/password
+  - (Optional) Configure Wi-Fi
 
-Ethernet connection (Wi-Fi is possible but not recommended for stability)
+2. FIND RASPBERRY PI IP
+Option 1: Check router DHCP leases
+Option 2: Run on Pi:
+ip a
 
-Raspberry Pi Imager (Download Here)
+3. SSH INTO RASPBERRY PI
+ssh pi@[IP_ADDRESS]
+Default password: (what you set in Imager)
 
-Power supply & case (optional but recommended)
+4. UPDATE SYSTEM
+sudo apt update && sudo apt upgrade -y
 
-Step 1: Flash Raspberry Pi OS Lite
-Download & Install Raspberry Pi Imager on your computer.
+5. SET STATIC IP (RECOMMENDED)
+Option 1: DHCP Reservation (Best)
+- Reserve IP in router settings
 
-Insert microSD card into your computer.
+Option 2: Manual Static IP
+sudo nano /etc/dhcpcd.conf
+Add:
+interface eth0
+static ip_address=192.168.1.100/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
+Then:
+sudo reboot
 
-Open Raspberry Pi Imager:
+6. INSTALL PI-HOLE
+curl -sSL https://install.pi-hole.net | bash
+Follow prompts:
+- Confirm static IP
+- Select upstream DNS (temporary)
+- Install web admin
+- Enable query logging
 
-Choose OS → Raspberry Pi OS (Other) → Raspberry Pi OS Lite (64-bit).
+Set admin password:
+pihole -a -p
 
-Choose Storage → Select your microSD card.
+7. ACCESS WEB INTERFACE
+http://[PI_IP]/admin
 
-Click the gear icon (⚙️) to configure settings:
+8. ADD BLOCKLISTS (OPTIONAL)
+1. Go to Admin -> Adlists
+2. Add lists from The Firebog (https://firebog.net/)
+3. Update Gravity
 
-Set hostname: pihole.local (or any name you prefer).
+9. CONFIGURE NETWORK DNS
+Option A: Manual per device
+- Set DNS to Pi-hole IP
 
-Enable SSH → Use password authentication.
+Option B: Router DHCP (Recommended)
+- Set primary DNS = Pi-hole IP
+- Secondary = Backup Pi-hole or 1.1.1.1
 
-Set username & password (default: pi + your password).
+## INSTALL UNBOUND (RECURSIVE DNS)
 
-Configure Wi-Fi (optional) or stick with Ethernet.
+1. INSTALL UNBOUND
+sudo apt install unbound -y
 
-Set locale (timezone & keyboard layout).
+2. CONFIGURE UNBOUND
+sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
+Paste:
+server:
+  verbosity: 0
+  interface: 127.0.0.1
+  port: 5335
+  do-ip4: yes
+  do-udp: yes
+  do-tcp: yes
+  do-ip6: no
+  prefer-ip6: no
+  harden-glue: yes
+  harden-dnssec-stripped: yes
+  use-caps-for-id: no
+  edns-buffer-size: 1232
+  prefetch: yes
+  num-threads: 1
+  so-rcvbuf: 1m
+  private-address: 192.168.0.0/16
+  private-address: 169.254.0.0/16
+  private-address: 172.16.0.0/12
+  private-address: 10.0.0.0/8
 
-Click "Write" and wait for the process to complete (~3-5 min).
+3. RESTART UNBOUND
+sudo service unbound restart
 
-Insert microSD into Raspberry Pi, connect Ethernet, and power it on.
+4. TEST UNBOUND
+dig example.com @127.0.0.1 -p 5335
 
-Step 2: Find Your Pi’s IP Address
-Once booted, find your Pi’s IP address:
+5. CONFIGURE PI-HOLE TO USE UNBOUND
+1. Go to Settings -> DNS
+2. Remove all upstream servers
+3. Add custom upstream: 127.0.0.1#5335
 
-Option 1: Check your router’s DHCP lease table.
+## VERIFICATION
+- Test ad blocking: https://ads-test.pi-hole.net
+- Check dashboard for blocked queries
 
-Option 2: Connect a monitor/keyboard and run:
+## MAINTENANCE
+Update Pi-hole:
+sudo pihole -up
+
+## LICENSE
+MIT

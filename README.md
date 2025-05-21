@@ -42,4 +42,23 @@ Default password: (what you set in Imager)
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
+5. Set Static IP (Recommended)
+   
+Option 1: DHCP Reservation (Best)
+
+Reserve IP in router settings (This is what I did)
+
+```bash
+sudo nano /etc/dhcpcd.conf
+```
+Add
+
+```bash
+interface eth0
+static ip_address=192.168.1.100/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1
+```
+
+
 

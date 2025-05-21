@@ -111,12 +111,10 @@ dig example.com @127.0.0.1 -p 5335
 3. Add custom upstream: 127.0.0.1#5335
 
 ## VERIFICATION
-- Test ad blocking: https://ads-test.pi-hole.net
+- Test ad blocking: [https://ads-test.pi-hole.net](https://adblock-tester.com/)
 - Check dashboard for blocked queries
 
 ## MAINTENANCE
 Update Pi-hole:
 sudo pihole -up
 
-## LICENSE
-MIT

@@ -92,7 +92,7 @@ http://[PI_IP]/admin
 
 Go to Admin -> Adlists
 
-Add lists from [The Firebog](https://firebog.net/)
+Add lists from [The Firebog](https://firebog.net/) or [hagezi](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file)
 
 Update Gravity
 

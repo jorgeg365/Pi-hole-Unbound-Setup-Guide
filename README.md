@@ -189,13 +189,21 @@ You now have a fully functional Pi-hole + Unbound system running on your Raspber
 
 Few screenshots I took throughout me stting up pi-hole
 
-Web ui of pi-hole:
+#Web ui of pi-hole:
 
 ![Screenshot 2025-05-21 162056](https://github.com/user-attachments/assets/96be4a44-9854-4161-abee-f165a44c6ed4)
 
-bloclists added result:
+#bloclists added result:
 
 ![Screenshot 2025-05-21 162303](https://github.com/user-attachments/assets/ee0c0776-2f06-44bb-8ba8-0c2ddf61fc5a)
+
+#AdBlock Tester prior to pi-hole set up: 46 out 100 points
+
+![Screenshot 2025-05-21 153537](https://github.com/user-attachments/assets/4c73d352-eff5-40de-a91f-95b5384469b2)
+
+#AdBlock Tester after to pi-hole set up: 99 out of 100 points
+
+![Screenshot 2025-05-21 153553](https://github.com/user-attachments/assets/fb89ec72-f640-45e8-a7c6-019626a6d968)
 
 
 

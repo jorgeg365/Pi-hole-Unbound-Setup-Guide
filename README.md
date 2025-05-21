@@ -24,8 +24,8 @@ A complete guide to setting up **Pi-hole** (network-wide ad blocker) and **Unbou
 
 2. Find Raspberry Pi IP
 
-# Option 1: Check router DHCP leases
-# Option 2: Run on Pi:
+Option 1: Check router DHCP leases
+Option 2: Run on Pi:
 ```bash
 ip a
 ```

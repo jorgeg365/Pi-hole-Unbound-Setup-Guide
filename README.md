@@ -122,6 +122,8 @@ sudo apt install unbound -y
 sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
 ```
 
+Paste:
+
 ```yaml
 server:
   verbosity: 0
@@ -144,6 +146,32 @@ server:
   private-address: 172.16.0.0/12
   private-address: 10.0.0.0/8
 ```
+
+3. Restart Unbound
+
+```bash
+sudo service unbound restart
+```
+
+4. Test Unbound
+
+```bash
+dig example.com @127.0.0.1 -p 5335
+```
+
+5. Configure Pi-hole to Use Unbound
+
+Go to Settings -> DNS
+
+Remove all upstream servers
+
+Add custom upstream: 127.0.0.1#5335
+
+✅ Verification
+
+Test ad blocking: [adblock-tester](https://adblock-tester.com/)
+
+Check dashboard for blocked queries
 
 
 

@@ -30,6 +30,16 @@ Option 2: Run on Pi:
 ip a
 ```
 3. SSH into Raspberry Pi
+   
 Terminal or Putty
+
 ssh pi@[IP_ADDRESS]
+
 Default password: (what you set in Imager)
+
+4. Update System
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+

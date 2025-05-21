@@ -14,13 +14,13 @@ A complete guide to setting up **Pi-hole** (network-wide ad blocker) and **Unbou
 
 ### 1. Flash Raspberry Pi OS Lite
 
-# Use Raspberry Pi Imager to install:
-# OS: Raspberry Pi OS Lite (64-bit)
-# Configure settings:
-# - Hostname: pihole.local
-# - Enable SSH
-# - Set username/password
-# - (Optional) Configure Wi-Fi
+ Use Raspberry Pi Imager to install:
+ OS: Raspberry Pi OS Lite (64-bit)
+ Configure settings:
+ - Hostname: pihole.local
+ - Enable SSH
+ - Set username/password
+ - (Optional) Configure Wi-Fi
 
 2. Find Raspberry Pi IP
 

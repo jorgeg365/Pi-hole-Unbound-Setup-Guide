@@ -1,135 +1,25 @@
 # Pi-hole + Unbound Setup on Raspberry Pi
 
-## PREREQUISITES
+A complete guide to setting up **Pi-hole** (network-wide ad blocker) and **Unbound** (recursive DNS resolver) on a Raspberry Pi.
+
+## 📋 Prerequisites
 - Raspberry Pi (3B+/4/5 recommended)
 - 8GB+ microSD card
 - Ethernet connection (recommended)
-- Raspberry Pi Imager (https://www.raspberrypi.com/software/)
+- [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
 
-## INSTALLATION STEPS
+---
 
-1. FLASH RASPBERRY PI OS LITE
-- Use Raspberry Pi Imager to install:
-  - OS: Raspberry Pi OS Lite (64-bit)
-- Configure settings:
-  - Hostname: pihole.local
-  - Enable SSH
-  - Set username/password
-  - (Optional) Configure Wi-Fi
+## 🚀 Installation Steps
 
-2. FIND RASPBERRY PI IP
-Option 1: Check router DHCP leases
-Option 2: Run on Pi:
+### 1. Flash Raspberry Pi OS Lite
 ```bash
-ip a
+# Use Raspberry Pi Imager to install:
+# OS: Raspberry Pi OS Lite (64-bit)
+# Configure settings:
+# - Hostname: pihole.local
+# - Enable SSH
+# - Set username/password
+# - (Optional) Configure Wi-Fi
 ```
-4. SSH INTO RASPBERRY PI
-ssh pi@[IP_ADDRESS]
-Default password: (what you set in Imager)
-
-5. UPDATE SYSTEM
-```bash
-sudo apt update && sudo apt upgrade -y
-```
-6. SET STATIC IP (RECOMMENDED)
-Option 1: DHCP Reservation (Best)
-- Reserve IP in router settings
-
-Option 2: Manual Static IP
-```bash
-sudo nano /etc/dhcpcd.conf
-```
-Add:
-```bash
-interface eth0
-static ip_address=192.168.1.100/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.1.1
-```
-Then:
-```bash
-sudo reboot
-```
-6. INSTALL PI-HOLE
-```bash
-curl -sSL https://install.pi-hole.net | bash
-```
-Follow prompts:
-- Confirm static IP
-- Select upstream DNS (temporary)
-- Install web admin
-- Enable query logging
-
-Set admin password:
-```bash
-pihole -a -p
-```
-7. ACCESS WEB INTERFACE
-http://[PI_IP]/admin
-
-8. ADD BLOCKLISTS (OPTIONAL)
-1. Go to Admin -> Adlists
-2. Add lists from The Firebog (https://firebog.net/)
-3. Update Gravity
-
-9. CONFIGURE NETWORK DNS
-Option A: Manual per device
-- Set DNS to Pi-hole IP
-
-Option B: Router DHCP (Recommended)
-- Set primary DNS = Pi-hole IP
-- Secondary = Backup Pi-hole or 1.1.1.1
-
-## INSTALL UNBOUND (RECURSIVE DNS)
-
-1. INSTALL UNBOUND
-```bash
-sudo apt install unbound -y
-```
-2. CONFIGURE UNBOUND
-```bash
-sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
-```
-Paste:
-```bash
-server:
-  verbosity: 0
-  interface: 127.0.0.1
-  port: 5335
-  do-ip4: yes
-  do-udp: yes
-  do-tcp: yes
-  do-ip6: no
-  prefer-ip6: no
-  harden-glue: yes
-  harden-dnssec-stripped: yes
-  use-caps-for-id: no
-  edns-buffer-size: 1232
-  prefetch: yes
-  num-threads: 1
-  so-rcvbuf: 1m
-  private-address: 192.168.0.0/16
-  private-address: 169.254.0.0/16
-  private-address: 172.16.0.0/12
-  private-address: 10.0.0.0/8
-```
-3. RESTART UNBOUND
-```bash
-sudo service unbound restart
-```
-4. TEST UNBOUND
-dig example.com @127.0.0.1 -p 5335
-
-5. CONFIGURE PI-HOLE TO USE UNBOUND
-1. Go to Settings -> DNS
-2. Remove all upstream servers
-3. Add custom upstream: 127.0.0.1#5335
-
-## VERIFICATION
-- Test ad blocking: [Adblock Tester](https://adblock-tester.com/)
-- Check dashboard for blocked queries
-
-## MAINTENANCE
-Update Pi-hole:
-sudo pihole -up
-
+2. Find Raspberry Pi IP

@@ -92,7 +92,7 @@ http://[PI_IP]/admin
 
 Go to Admin -> Adlists
 
-Add lists from The Firebog
+Add lists from [The Firebog](https://firebog.net/)
 
 Update Gravity
 

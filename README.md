@@ -173,7 +173,24 @@ Test ad blocking: [adblock-tester](https://adblock-tester.com/)
 
 Check dashboard for blocked queries
 
+🔄 Maintenance
+Update Pi-hole:
 
+```bash
+sudo pihole -up
+```
+🎉 Setup Complete!
+You now have a fully functional Pi-hole + Unbound system running on your Raspberry Pi, providing:
+
+✓ Network-wide ad blocking
+✓ Faster DNS resolution (through local caching)
+✓ Enhanced privacy (no reliance on external DNS providers)
+✓ Detailed analytics (through the Pi-hole dashboard)
+
+Few screenshots I took throughout me stting up pi-hole
+
+Web ui of pi-hole:
+![Screenshot 2025-05-21 162056](https://github.com/user-attachments/assets/96be4a44-9854-4161-abee-f165a44c6ed4)
 
 
 

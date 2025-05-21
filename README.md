@@ -1,31 +1,48 @@
-# Pi-hole-Unbound-Setup-Guide
-Pi-hole + Unbound Setup Guide
-# Pi-hole + Unbound Setup on Raspberry Pi
+Guide to Install and Set Up Pi-hole with Unbound on Raspberry Pi
 
-A complete guide to setting up **Pi-hole** (network-wide ad blocker) and **Unbound** (recursive DNS resolver) on a Raspberry Pi.
+This guide will walk you through installing Pi-hole (a network-wide ad blocker) and Unbound (a recursive DNS resolver) on a Raspberry Pi for improved privacy and ad-free browsing.
 
-## 📋 Prerequisites
-- Raspberry Pi (3B+/4/5 recommended)
-- 8GB+ microSD card
-- Ethernet connection (recommended)
-- [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
+Requirements
+Raspberry Pi (Recommended: Pi 3B+/4/5, but Pi 2/3 also works)
 
----
+MicroSD Card (8GB minimum, 16GB recommended)
 
-## 🚀 Installation Steps
+Ethernet connection (Wi-Fi is possible but not recommended for stability)
 
-### 1. Flash Raspberry Pi OS Lite
-```bash
-# Use Raspberry Pi Imager to install:
-# OS: Raspberry Pi OS Lite (64-bit)
-# Configure settings:
-# - Hostname: pihole.local
-# - Enable SSH
-# - Set username/password
-# - (Optional) Configure Wi-Fi
+Raspberry Pi Imager (Download Here)
 
-2. Find Raspberry Pi IP
-bash
-# Option 1: Check router DHCP leases
-# Option 2: Run on Pi:
-ip a
+Power supply & case (optional but recommended)
+
+Step 1: Flash Raspberry Pi OS Lite
+Download & Install Raspberry Pi Imager on your computer.
+
+Insert microSD card into your computer.
+
+Open Raspberry Pi Imager:
+
+Choose OS → Raspberry Pi OS (Other) → Raspberry Pi OS Lite (64-bit).
+
+Choose Storage → Select your microSD card.
+
+Click the gear icon (⚙️) to configure settings:
+
+Set hostname: pihole.local (or any name you prefer).
+
+Enable SSH → Use password authentication.
+
+Set username & password (default: pi + your password).
+
+Configure Wi-Fi (optional) or stick with Ethernet.
+
+Set locale (timezone & keyboard layout).
+
+Click "Write" and wait for the process to complete (~3-5 min).
+
+Insert microSD into Raspberry Pi, connect Ethernet, and power it on.
+
+Step 2: Find Your Pi’s IP Address
+Once booted, find your Pi’s IP address:
+
+Option 1: Check your router’s DHCP lease table.
+
+Option 2: Connect a monitor/keyboard and run:

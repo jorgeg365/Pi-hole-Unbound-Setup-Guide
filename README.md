@@ -30,6 +30,6 @@ A complete guide to setting up **Pi-hole** (network-wide ad blocker) and **Unbou
 ip a
 ```
 3. SSH into Raspberry Pi
-# Terminal or Putty
+Terminal or Putty
 ssh pi@[IP_ADDRESS]
-# Default password: (what you set in Imager)
+Default password: (what you set in Imager)

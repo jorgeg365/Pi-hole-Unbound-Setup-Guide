@@ -88,6 +88,13 @@ On web browser
 
 http://[PI_IP]/admin
 
+8. Add Blocklists (Suggested)
+
+Go to Admin -> Adlists
+
+Add lists from The Firebog
+
+Update Gravity
 
 
 

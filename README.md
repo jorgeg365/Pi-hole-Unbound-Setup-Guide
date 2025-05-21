@@ -94,8 +94,23 @@ Go to Admin -> Adlists
 
 Add lists from [The Firebog](https://firebog.net/) or [hagezi](https://github.com/hagezi/dns-blocklists?tab=readme-ov-file)
 
+In tools make sure to:
+
 Update Gravity
 
+9. Configure Network DNS
+Option A: Manual per device
+Set DNS to Pi-hole IP
+
+Option B: Router DHCP 
+Set primary DNS = Pi-hole IP
+
+Secondary = Backup Pi-hole or 1.1.1.1
+
+(I did option A as a trial)
+
+🔄 Install Unbound (Recursive DNS)
+1. Install Unbound
 
 
 

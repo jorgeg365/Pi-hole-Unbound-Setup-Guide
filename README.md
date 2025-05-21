@@ -65,6 +65,31 @@ Then:
 ```bash
 sudo reboot
 ```
+6. Install Pi-hole
+
+```bash
+curl -sSL https://install.pi-hole.net | bash
+```
+Follow prompts:
+
+Confirm static IP
+
+Select upstream DNS (temporary)
+
+Install web admin
+
+Enable query logging
+
+You will get a passwrod at the end of Installation
+
+7. Access Web Interface
+
+On web browser
+
+http://[PI_IP]/admin
+
+
+
 
 
 

@@ -193,7 +193,7 @@ Few screenshots I took throughout me stting up pi-hole
 
 ![Screenshot 2025-05-21 162056](https://github.com/user-attachments/assets/96be4a44-9854-4161-abee-f165a44c6ed4)
 
-## bloclists added result:
+## blocklists added result:
 
 ![Screenshot 2025-05-21 162303](https://github.com/user-attachments/assets/ee0c0776-2f06-44bb-8ba8-0c2ddf61fc5a)
 
